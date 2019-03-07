@@ -1,4 +1,4 @@
-#[[# Spring Boot with camel and other usefule things]]# ${artifactId} 
+#[[# Spring Boot with camel and other useful things]]# ${artifactId} 
 
 #[[## To build this project use]]#
 
