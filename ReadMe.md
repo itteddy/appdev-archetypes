@@ -2,7 +2,7 @@
 
 ## spring-boot-camel
 
-Spring Boot with camel and other usefule things.
+Spring Boot with camel and other useful things.
 
 ```
 mvn archetype:generate \
