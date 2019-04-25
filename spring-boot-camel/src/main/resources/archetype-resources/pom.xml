@@ -14,6 +14,7 @@
         <swagger.ui.version>${swagger-ui-version}</swagger.ui.version>
         <swagger.codegen.version>${swagger-codegen-version}</swagger.codegen.version>
         <fmp.version>${fmp-version}</fmp.version>
+        <cxf.codegen.plugin.version>cxf-codegen-plugin-version</cxf.codegen.plugin.version>
         <project.reporting.outputEncoding>${project-reporting-outputEncoding}</project.reporting.outputEncoding>
         <project.build.sourceEncoding>${project-build-sourceEncoding}</project.build.sourceEncoding>
     </properties>
@@ -224,9 +225,9 @@
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>org.jboss.redhat-fuse</groupId>
+                        <groupId>org.apache.cxf</groupId>
                         <artifactId>cxf-codegen-plugin</artifactId>
-                        <version>${cxf.codegen.version}</version>
+                        <version>${cxf.codegen.plugin.version}</version>
                         <executions>
                             <execution>
                                 <id>generate-sources</id>

@@ -10,16 +10,19 @@
       <defaultValue>2.23.1</defaultValue>
     </requiredProperty>
     <requiredProperty key="spring-boot-version">
-      <defaultValue>2.1.2.RELEASE</defaultValue>
+      <defaultValue>2.1.4.RELEASE</defaultValue>
     </requiredProperty>
     <requiredProperty key="swagger-ui-version">
-      <defaultValue>3.20.5</defaultValue>
+      <defaultValue>3.22.0</defaultValue>
     </requiredProperty>
     <requiredProperty key="swagger-codegen-version">
-      <defaultValue>3.0.4</defaultValue>
+      <defaultValue>3.0.7</defaultValue>
     </requiredProperty>
     <requiredProperty key="fmp-version">
-      <defaultValue>3.5.42</defaultValue>
+      <defaultValue>4.1.0</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="cxf-codegen-plugin-version">
+      <defaultValue>3.3.1</defaultValue>
     </requiredProperty>
     <requiredProperty key="project-reporting-outputEncoding">
       <defaultValue>UTF-8</defaultValue>
@@ -27,6 +30,7 @@
     <requiredProperty key="project-build-sourceEncoding">
       <defaultValue>UTF-8</defaultValue>
     </requiredProperty>
+    
   </requiredProperties>
  <fileSets>
     <fileSet filtered="true" packaged="true" encoding="UTF-8">
