@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>${groupId}</groupId>
+    <artifactId>${artifactId}</artifactId>
+    <version>${version}</version>
+    <packaging>jar</packaging>
+    <name>${artifactId}</name>
+    <description>${artifactId}</description>
+
+    <properties>
+        <camel.version>${camel-version}</camel.version>
+        <spring.boot.version>${spring-boot-version}</spring.boot.version>
+        <swagger.codegen.version>${swagger-codegen-version}</swagger.codegen.version>
+        <cxf.codegen.plugin.version>cxf-codegen-plugin-version</cxf.codegen.plugin.version>
+        <project.reporting.outputEncoding>${project-reporting-outputEncoding}</project.reporting.outputEncoding>
+        <project.build.sourceEncoding>${project-build-sourceEncoding}</project.build.sourceEncoding>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- Spring Boot BOM -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- Camel BOM -->
+            <dependency>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-spring-boot-dependencies</artifactId>
+                <version>${camel.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+
+    <dependencies>
+        
+    </dependencies>
+    <build>
+        <defaultGoal>install</defaultGoal>
+    </build>
+    <profiles>
+        <!-- generate code from swagger -->
+        <profile>
+            <id>swaggergen</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.camel</groupId>
+                        <artifactId>camel-restdsl-swagger-plugin</artifactId>
+                        <version>${camel.version}</version>
+                        <executions>
+                            <execution>
+                                <id>generate-sources</id>
+                                <goals>
+                                    <goal>generate-xml</goal>
+                                </goals>
+                                <configuration>
+                                    <specificationUri>src/main/resources/api-definitions/basic-api.yaml</specificationUri>
+                                    <outputDirectory>src/main/resources/camel-rest</outputDirectory>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>io.swagger</groupId>
+                        <artifactId>swagger-codegen-maven-plugin</artifactId>
+                        <version>${swagger.codegen.version}</version>
+                        <executions>
+                            <execution>
+                                <id>generate-sources</id>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                                <configuration>
+                                    <inputSpec>src/main/resources/api-definitions/basic-api.yaml</inputSpec>
+                                    <language>jaxrs-cxf</language>
+                                    <generateApis>false</generateApis>
+                                    <generateSupportingFiles>false</generateSupportingFiles>
+                                    <modelPackage>restsvc.model</modelPackage>
+                                    <apiPackage>restsvc.api</apiPackage>
+                                    <output>${basedir}/src/main/java</output>
+                                    <generateApiTests>false</generateApiTests>
+                                    <configOptions>
+                                        <serializableModel>true</serializableModel>
+                                        <sourceFolder>./</sourceFolder>
+                                        <implFolder>./../../../target/tmp</implFolder>
+                                    </configOptions>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+#if (${cxfSupport} == 'true')
+         <!-- generate code from a wsdl -->
+        <profile>
+            <id>cxfgen</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.cxf</groupId>
+                        <artifactId>cxf-codegen-plugin</artifactId>
+                        <version>${cxf.codegen.plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>generate-sources</id>
+                                <phase>generate-sources</phase>
+                                <goals>
+                                    <goal>wsdl2java</goal>
+                                </goals>
+                                <configuration>
+                                    <sourceRoot>${basedir}/src/main/java</sourceRoot>
+                                    <wsdlOptions>
+                                        <wsdlOption>
+                                            <wsdl>${basedir}/src/main/resources/wsdl/contract.wsdl</wsdl>
+                                            <wsdlLocation>classpath:wsdl/contract.wsdl</wsdlLocation>
+                                            <bareMethods></bareMethods>
+                                        </wsdlOption>
+                                    </wsdlOptions>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+#end
+    
+    </profiles>
+</project>
