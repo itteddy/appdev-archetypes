@@ -30,7 +30,12 @@
     <requiredProperty key="project-build-sourceEncoding">
       <defaultValue>UTF-8</defaultValue>
     </requiredProperty>
-    
+    <requiredProperty key="maven-compiler-target">
+      <defaultValue>1.8</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="maven-compiler-source">
+      <defaultValue>1.8</defaultValue>
+    </requiredProperty>
   </requiredProperties>
  <fileSets>
     <fileSet filtered="true" packaged="true" encoding="UTF-8">

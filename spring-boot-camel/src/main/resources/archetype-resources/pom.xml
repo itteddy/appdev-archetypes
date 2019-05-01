@@ -17,6 +17,8 @@
         <cxf.codegen.plugin.version>cxf-codegen-plugin-version</cxf.codegen.plugin.version>
         <project.reporting.outputEncoding>${project-reporting-outputEncoding}</project.reporting.outputEncoding>
         <project.build.sourceEncoding>${project-build-sourceEncoding}</project.build.sourceEncoding>
+        <maven.compiler.target>${maven-compiler-target}</maven.compiler.target>
+        <maven.compiler.source>${maven-compiler-source}</maven.compiler.source>
     </properties>
 
     <dependencyManagement>
