@@ -12,7 +12,7 @@
         <camel.version>${camel-version}</camel.version>
         <spring.boot.version>${spring-boot-version}</spring.boot.version>
         <swagger.codegen.version>${swagger-codegen-version}</swagger.codegen.version>
-        <cxf.codegen.plugin.version>cxf-codegen-plugin-version</cxf.codegen.plugin.version>
+        <cxf.codegen.plugin.version>${cxf-codegen-plugin-version}</cxf.codegen.plugin.version>
         <project.reporting.outputEncoding>${project-reporting-outputEncoding}</project.reporting.outputEncoding>
         <project.build.sourceEncoding>${project-build-sourceEncoding}</project.build.sourceEncoding>
         <maven.compiler.target>${maven-compiler-target}</maven.compiler.target>
