@@ -31,3 +31,11 @@ http://localhost:8090/webjars/swagger-ui/${swagger-ui-version}/index.html?url=/c
 ```
 curl http://localhost:8090/camel/restsvc/ping
 ```
+
+#[[## Run local container with specific network and IP address]]#
+
+
+```
+docker build -t ${artifactId} .
+docker run -d --net primenet --ip 172.18.0.10 --name ${artifactId} ${artifactId}
+```
