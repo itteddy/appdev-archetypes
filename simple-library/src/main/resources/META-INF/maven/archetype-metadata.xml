@@ -10,7 +10,7 @@
       <defaultValue>2.24.1</defaultValue>
     </requiredProperty>
     <requiredProperty key="spring-boot-version">
-      <defaultValue>2.1.4.RELEASE</defaultValue>
+      <defaultValue>2.1.6.RELEASE</defaultValue>
     </requiredProperty>
     <requiredProperty key="swagger-ui-version">
       <defaultValue>3.22.0</defaultValue>
