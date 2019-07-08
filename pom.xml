@@ -8,5 +8,7 @@
   <modules>
 		<module>spring-boot-camel</module>
 		<module>simple-library</module>
-  </modules>
+		<module>quarkus-library</module>
+		<module>quarkus-camel</module>
+	  </modules>
 </project>

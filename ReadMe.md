@@ -21,3 +21,21 @@ mvn archetype:generate \
     -DarchetypeArtifactId=spring-boot-camel \
     -DarchetypeVersion=1.0.0
 ```
+
+## quarkus-library
+
+```
+mvn archetype:generate \
+    -DarchetypeGroupId=com.itteddy.archetypes \
+    -DarchetypeArtifactId=quarkus-library \
+    -DarchetypeVersion=1.0.0
+```
+
+## quarkus-camel
+
+```
+mvn archetype:generate \
+    -DarchetypeGroupId=com.itteddy.archetypes \
+    -DarchetypeArtifactId=quarkus-camel \
+    -DarchetypeVersion=1.0.0
+```
