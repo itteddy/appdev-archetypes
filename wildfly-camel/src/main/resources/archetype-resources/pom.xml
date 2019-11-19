@@ -4,81 +4,95 @@
     <groupId>${groupId}</groupId>
     <artifactId>${artifactId}</artifactId>
     <version>${version}</version>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
     <name>${artifactId}</name>
     <description>${artifactId}</description>
-
+    <!-- Properties -->
     <properties>
+        <wildfly.camel.version>${wildfly-camel-version}</wildfly.camel.version>
         <camel.version>${camel-version}</camel.version>
-        <spring.boot.version>${spring-boot-version}</spring.boot.version>
+        <maven-compiler-plugin.version>${maven-compiler-plugin-version}</maven-compiler-plugin.version>
+        <maven-war-plugin.version>${maven-war-plugin-version}</maven-war-plugin.version>
+        <wildfly-maven-plugin.version>${wildfly-maven-plugin-version}</wildfly-maven-plugin.version>
+        <maven-surefire-plugin.version>${maven-surefire-plugin-version}</maven-surefire-plugin.version>
+        <cxf.codegen.plugin.version>${cxf-codegen-plugin-version}</cxf.codegen.plugin.version>
         <swagger.ui.version>${swagger-ui-version}</swagger.ui.version>
         <swagger.codegen.version>${swagger-codegen-version}</swagger.codegen.version>
-        <fmp.version>${fmp-version}</fmp.version>
-        <cxf.codegen.plugin.version>${cxf-codegen-plugin-version}</cxf.codegen.plugin.version>
         <logstash.encoder.version>${logstash-encoder-version}</logstash.encoder.version>
+        <primefaces.version>${primefaces-version}</primefaces.version>
         <project.reporting.outputEncoding>${project-reporting-outputEncoding}</project.reporting.outputEncoding>
         <project.build.sourceEncoding>${project-build-sourceEncoding}</project.build.sourceEncoding>
         <maven.compiler.target>${maven-compiler-target}</maven.compiler.target>
         <maven.compiler.source>${maven-compiler-source}</maven.compiler.source>
+        <jboss.home>PATH_TO_EAPHOME</jboss.home>
+        <server.config>standalone.xml</server.config>
+        <wildfly.hostname>localhost</wildfly.hostname>
+        <wildfly.port>9990</wildfly.port>
+        <wildfly.username>admin</wildfly.username>
+        <wildfly.password>admin</wildfly.password>
     </properties>
-
+    <!-- DependencyManagement -->
     <dependencyManagement>
         <dependencies>
-            <!-- Spring Boot BOM -->
             <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring.boot.version}</version>
-                <type>pom</type>
+                <groupId>org.wildfly.camel</groupId>
+                <artifactId>wildfly-camel-bom</artifactId>
+                <version>${version.wildfly.camel}</version>
                 <scope>import</scope>
-            </dependency>
-            <!-- Camel BOM -->
-            <dependency>
-                <groupId>org.apache.camel</groupId>
-                <artifactId>camel-spring-boot-dependencies</artifactId>
-                <version>${camel.version}</version>
                 <type>pom</type>
-                <scope>import</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
-
-
+    <!-- Dependencies -->
     <dependencies>
-        <!-- base -->
+        <!-- Provided -->
         <dependency>
             <groupId>org.apache.camel</groupId>
-            <artifactId>camel-spring-boot-starter</artifactId>
+            <artifactId>camel-cdi</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-tomcat</artifactId>
-                </exclusion>
-            </exclusions>
+            <groupId>javax.enterprise</groupId>
+            <artifactId>cdi-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-core</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-undertow</artifactId>
+            <groupId>org.jboss.spec.javax.servlet</groupId>
+            <artifactId>jboss-servlet-api_3.1_spec</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
+            <groupId>org.jboss.spec.javax.jms</groupId>
+            <artifactId>jboss-jms-api_2.0_spec</artifactId>
+            <scope>provided</scope>
         </dependency>
-        <!-- autoreload on changes -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <optional>true</optional>
-            <scope>runtime</scope>
+            <groupId>org.jboss.spec.javax.transaction</groupId>
+            <artifactId>jboss-transaction-api_1.2_spec</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!-- Test -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.arquillian.junit</groupId>
+            <artifactId>arquillian-junit-container</artifactId>
+            <scope>test</scope>
         </dependency>
         <!-- Swagger support for restdsl -->
         <dependency>
             <groupId>org.apache.camel</groupId>
-            <artifactId>camel-swagger-java-starter</artifactId>
+            <artifactId>camel-swagger-java</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.webjars</groupId>
@@ -88,96 +102,154 @@
         <!-- parsing rendering support -->
         <dependency>
             <groupId>org.apache.camel</groupId>
-            <artifactId>camel-jackson-starter</artifactId>
+            <artifactId>camel-jackson</artifactId>
+            <scope>provided</scope>
         </dependency>
         <!-- calling rest services through http4 -->
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-http4</artifactId>
+            <scope>provided</scope>
         </dependency>
-        <!--Camel Servlet starter -->
+        <!--Camel Servlet -->
         <dependency>
             <groupId>org.apache.camel</groupId>
-            <artifactId>camel-servlet-starter</artifactId>
+            <artifactId>camel-servlet</artifactId>
+            <scope>provided</scope>
         </dependency>
 
 #if (${cxfSupport} == 'true')
-        <!--Camel CXF starter -->
+        <!--Camel CXF -->
         <dependency>
             <groupId>org.apache.camel</groupId>
-            <artifactId>camel-cxf-starter</artifactId>
+            <artifactId>camel-cxf</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-soap</artifactId>
+            <scope>provided</scope>
         </dependency>
 #end
+
+        <!--Camel jms -->
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-jms</artifactId>
+            <scope>provided</scope>
+        </dependency>
 
         <!--Circuit breaker-->
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-hystrix</artifactId>
+            <scope>provided</scope>
         </dependency>
         <!--For database access -->
         <dependency>
             <groupId>org.apache.camel</groupId>
-            <artifactId>camel-sql-starter</artifactId>
+            <artifactId>camel-sql</artifactId>
+            <scope>provided</scope>
         </dependency>
 
-        <!-- Aggregated logs using JSON -->
+        <!-- Import the JSF API, we use provided scope as the API is included in JBoss EAP -->
         <dependency>
-            <groupId>net.logstash.logback</groupId>
-            <artifactId>logstash-logback-encoder</artifactId>
-            <version>${logstash.encoder.version}</version>
+            <groupId>org.jboss.spec.javax.faces</groupId>
+            <artifactId>jboss-jsf-api_2.3_spec</artifactId>
+            <scope>provided</scope>
         </dependency>
 
+#if (${pfSupport} == 'true')
+        <!-- PrimeFaces support -->
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>${primefaces.version}</version>
+        </dependency>
+#end
     </dependencies>
+    <!-- Build -->
     <build>
-        <defaultGoal>spring-boot:run</defaultGoal>
+        <finalName>${project.artifactId}</finalName>
+        <testResources>
+            <testResource>
+                <directory>src/test/resources</directory>
+                <filtering>true</filtering>
+            </testResource>
+        </testResources>
         <plugins>
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring.boot.version}</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
                 <configuration>
-                    <profiles>
-                        <profile>dev</profile>
-                    </profiles>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>${maven-war-plugin.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.wildfly.plugins</groupId>
+                <artifactId>wildfly-maven-plugin</artifactId>
+                <version>${wildfly-maven-plugin.version}</version>
+                <configuration>
+                    <jbossHome>${jboss.home}</jbossHome>
+                    <serverConfig>${server.config}</serverConfig>
                 </configuration>
             </plugin>
         </plugins>
     </build>
+    <!-- Profiles -->
     <profiles>
+        <!-- Separate profiles are provided for running tests, including Arquillian tests that execute in a specified container -->
         <profile>
-            <id>k8s</id>
+            <!-- The default profile skips all tests, though you can tune it to run just unit tests based on a custom pattern -->
+            <id>default</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>io.fabric8</groupId>
-                        <artifactId>fabric8-maven-plugin</artifactId>
-                        <version>${fmp.version}</version>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>resource</goal>
-                                    <goal>build</goal>
-                                </goals>
-                            </execution>
-                        </executions>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>${maven-surefire-plugin.version}</version>
+                        <configuration>
+                            <skip>true</skip>
+                        </configuration>
                     </plugin>
                 </plugins>
             </build>
         </profile>
-        <!-- generate code from swagger -->
         <profile>
-            <id>swaggergen</id>
+            <!-- An optional Arquillian testing profile that executes tests in your container instance -->
+            <!-- Run with: mvn clean test -Parq-managed -->
+            <id>arq-managed</id>
+            <dependencies>
+                <dependency>
+                    <groupId>org.wildfly.arquillian</groupId>
+                    <artifactId>wildfly-arquillian-container-managed</artifactId>
+                    <scope>test</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <!-- An optional Arquillian testing profile that executes tests in a remote container instance -->
+            <!-- Run with: mvn clean test -Parq-remote -->
+            <id>arq-remote</id>
+            <dependencies>
+                <dependency>
+                    <groupId>org.wildfly.arquillian</groupId>
+                    <artifactId>wildfly-arquillian-container-remote</artifactId>
+                    <scope>test</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <id>camelrestgen</id>
             <build>
                 <plugins>
                     <plugin>
@@ -191,12 +263,20 @@
                                     <goal>generate-xml</goal>
                                 </goals>
                                 <configuration>
-                                    <specificationUri>src/main/resources/api-definitions/basic-api.yaml</specificationUri>
-                                    <outputDirectory>src/main/resources/camel-rest</outputDirectory>
+                                    <specificationUri>src/main/resources/swaggerdef/swagger.json</specificationUri>
+                                    <outputDirectory>src/main/resources</outputDirectory>
                                 </configuration>
                             </execution>
                         </executions>
                     </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <!-- generate code from swagger -->
+        <profile>
+            <id>swaggergen</id>
+            <build>
+                <plugins>
                     <plugin>
                         <groupId>io.swagger</groupId>
                         <artifactId>swagger-codegen-maven-plugin</artifactId>
@@ -208,7 +288,7 @@
                                     <goal>generate</goal>
                                 </goals>
                                 <configuration>
-                                    <inputSpec>src/main/resources/api-definitions/basic-api.yaml</inputSpec>
+                                    <inputSpec>src/main/resources/swaggerdef/swagger.json</inputSpec>
                                     <language>jaxrs-cxf</language>
                                     <generateApis>false</generateApis>
                                     <generateSupportingFiles>false</generateSupportingFiles>
@@ -218,6 +298,7 @@
                                     <generateApiTests>false</generateApiTests>
                                     <configOptions>
                                         <serializableModel>true</serializableModel>
+                                        <withXml>true</withXml>
                                         <sourceFolder>./</sourceFolder>
                                         <implFolder>./../../../target/tmp</implFolder>
                                     </configOptions>
@@ -263,6 +344,7 @@
             </build>
         </profile>
 #end
+
     
     </profiles>
 </project>

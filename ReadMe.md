@@ -22,6 +22,17 @@ mvn archetype:generate \
     -DarchetypeVersion=1.0.0
 ```
 
+## wildfly-camel
+
+Spring Boot with camel and other useful things.
+
+```
+mvn archetype:generate \
+    -DarchetypeGroupId=com.itteddy.archetypes \
+    -DarchetypeArtifactId=wildfly-camel \
+    -DarchetypeVersion=1.0.0
+```
+
 ## quarkus-library
 
 ```
