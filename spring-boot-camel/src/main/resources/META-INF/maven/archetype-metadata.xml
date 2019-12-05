@@ -16,7 +16,7 @@
       <defaultValue>2.2.1.RELEASE</defaultValue>
     </requiredProperty>
     <requiredProperty key="swagger-ui-version">
-      <defaultValue>3.24.0</defaultValue>
+      <defaultValue>3.24.3</defaultValue>
     </requiredProperty>
     <requiredProperty key="swagger-codegen-version">
       <defaultValue>2.4.10</defaultValue>

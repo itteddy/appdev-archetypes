@@ -5,7 +5,7 @@
        xmlns:cxf="http://camel.apache.org/schema/cxf"
        xsi:schemaLocation="
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+       http://camel.apache.org/schema/spring https://camel.apache.org/schema/spring/camel-spring-3.0.0.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
        http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.xsd
        ">
@@ -24,7 +24,7 @@
 
         <route id="http-receiver">
             <from id="http-receiver-starter" uri="servlet://ping" />
-            <setHeader headerName="Content-Type">
+            <setHeader name="Content-Type">
                 <constant>application/json</constant>
             </setHeader>
             <setBody>
