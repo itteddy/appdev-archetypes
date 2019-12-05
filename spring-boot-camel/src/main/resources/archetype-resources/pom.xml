@@ -35,7 +35,7 @@
             </dependency>
             <!-- Camel BOM -->
             <dependency>
-                <groupId>org.apache.camel</groupId>
+                <groupId>org.apache.camel${camel-3-sbsuffix}</groupId>
                 <artifactId>camel-spring-boot-dependencies</artifactId>
                 <version>${camel.version}</version>
                 <type>pom</type>
