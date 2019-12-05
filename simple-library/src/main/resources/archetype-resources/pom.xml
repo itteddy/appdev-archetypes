@@ -31,7 +31,7 @@
             </dependency>
             <!-- Camel BOM -->
             <dependency>
-                <groupId>org.apache.camel</groupId>
+                <groupId>org.apache.camel${camel-3-sbsuffix}</groupId>
                 <artifactId>camel-spring-boot-dependencies</artifactId>
                 <version>${camel.version}</version>
                 <type>pom</type>
@@ -71,7 +71,7 @@
                         </executions>
                     </plugin>
                     <plugin>
-                        <groupId>io.swagger.codegen.v3</groupId>
+                        <groupId>io.swagger.codegen</groupId>
                         <artifactId>swagger-codegen-maven-plugin</artifactId>
                         <version>${swagger.codegen.version}</version>
                         <executions>
