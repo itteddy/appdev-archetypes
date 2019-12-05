@@ -6,11 +6,17 @@
     <requiredProperty key="cxfSupport" >
       <defaultValue>false</defaultValue>
     </requiredProperty>
+    <requiredProperty key="pfSupport" >
+      <defaultValue>false</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="jmsSupport" >
+      <defaultValue>false</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="wildfly-camel-version">
+      <defaultValue>10.3.0</defaultValue>
+    </requiredProperty>
     <requiredProperty key="camel-version">
       <defaultValue>2.24.2</defaultValue>
-    </requiredProperty>
-    <requiredProperty key="spring-boot-version">
-      <defaultValue>2.2.1.RELEASE</defaultValue>
     </requiredProperty>
     <requiredProperty key="swagger-ui-version">
       <defaultValue>3.24.0</defaultValue>
@@ -18,17 +24,26 @@
     <requiredProperty key="swagger-codegen-version">
       <defaultValue>2.4.10</defaultValue>
     </requiredProperty>
-    <requiredProperty key="fmp-version">
-      <defaultValue>4.3.1</defaultValue>
-    </requiredProperty>
     <requiredProperty key="cxf-codegen-plugin-version">
       <defaultValue>3.3.4</defaultValue>
     </requiredProperty>
     <requiredProperty key="logstash-encoder-version">
       <defaultValue>6.2</defaultValue>
     </requiredProperty>
-    <requiredProperty key="webjars-locator-version">
-      <defaultValue>0.38</defaultValue>
+    <requiredProperty key="primefaces-version">
+      <defaultValue>7.0</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="maven-compiler-plugin-version">
+      <defaultValue>3.8.1</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="maven-war-plugin-version">
+      <defaultValue>3.2.3</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="wildfly-maven-plugin-version">
+      <defaultValue>2.0.1.Final</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="maven-surefire-plugin-version">
+      <defaultValue>2.22.2</defaultValue>
     </requiredProperty>
     <requiredProperty key="project-reporting-outputEncoding">
       <defaultValue>UTF-8</defaultValue>
@@ -56,8 +71,20 @@
         <include>**/*</include>
       </includes>
     </fileSet>
+    <fileSet filtered="true" encoding="UTF-8">
+      <directory>src/main/webapp</directory>
+      <includes>
+        <include>**/*</include>
+      </includes>
+    </fileSet>
      <fileSet filtered="true" encoding="UTF-8">
          <directory>src/main/fabric8</directory>
+         <includes>
+             <include>**/*</include>
+         </includes>
+     </fileSet>
+     <fileSet filtered="true" encoding="UTF-8">
+         <directory>src/main/fabric8-includes</directory>
          <includes>
              <include>**/*</include>
          </includes>

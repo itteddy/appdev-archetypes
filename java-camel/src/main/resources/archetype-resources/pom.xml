@@ -16,7 +16,6 @@
         <fmp.version>${fmp-version}</fmp.version>
         <cxf.codegen.plugin.version>${cxf-codegen-plugin-version}</cxf.codegen.plugin.version>
         <logstash.encoder.version>${logstash-encoder-version}</logstash.encoder.version>
-        <webjars.locator.version>${webjars-locator-version}</webjars.locator.version>
         <project.reporting.outputEncoding>${project-reporting-outputEncoding}</project.reporting.outputEncoding>
         <project.build.sourceEncoding>${project-build-sourceEncoding}</project.build.sourceEncoding>
         <maven.compiler.target>${maven-compiler-target}</maven.compiler.target>
@@ -86,13 +85,6 @@
             <artifactId>swagger-ui</artifactId>
             <version>${swagger.ui.version}</version>
         </dependency>
-
-        <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>webjars-locator</artifactId>
-            <version>${webjars.locator.version}</version>
-        </dependency>
-
         <!-- parsing rendering support -->
         <dependency>
             <groupId>org.apache.camel</groupId>
