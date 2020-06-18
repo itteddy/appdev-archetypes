@@ -36,6 +36,9 @@ curl http://localhost:8090/camel/restsvc/ping
 
 
 ```
+docker stop ${artifactId}
+docker rm ${artifactId}
+docker rmi ${artifactId}
 docker build -t ${artifactId} .
 docker run -d --net primenet --ip 172.18.0.10 --name ${artifactId} ${artifactId}
 ```
