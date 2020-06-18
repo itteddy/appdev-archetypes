@@ -17,6 +17,7 @@
         <cxf.codegen.plugin.version>${cxf-codegen-plugin-version}</cxf.codegen.plugin.version>
         <logstash.encoder.version>${logstash-encoder-version}</logstash.encoder.version>
         <webjars.locator.version>${webjars-locator-version}</webjars.locator.version>
+        <hawtio.springboot.version>${hawtio-springboot-version}</hawtio.springboot.version>
         <project.reporting.outputEncoding>${project-reporting-outputEncoding}</project.reporting.outputEncoding>
         <project.build.sourceEncoding>${project-build-sourceEncoding}</project.build.sourceEncoding>
         <maven.compiler.target>${maven-compiler-target}</maven.compiler.target>
@@ -68,6 +69,19 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <!-- activate JMX metrics for camel -->
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-management</artifactId>
+        </dependency>
+
+        <!-- Hawtio -->
+        <dependency>
+            <groupId>io.hawt</groupId>
+            <artifactId>hawtio-springboot</artifactId>
+            <version>${hawtio.springboot.version}</version>
         </dependency>
 
         <!-- xml  dependencies for java 11-->

@@ -33,6 +33,9 @@
     <requiredProperty key="webjars-locator-version">
       <defaultValue>0.40</defaultValue>
     </requiredProperty>
+    <requiredProperty key="hawtio-springboot-version">
+      <defaultValue>2.10.0</defaultValue>
+    </requiredProperty>
     <requiredProperty key="project-reporting-outputEncoding">
       <defaultValue>UTF-8</defaultValue>
     </requiredProperty>
