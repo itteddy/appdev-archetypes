@@ -42,3 +42,23 @@ docker rmi ${artifactId}
 docker build -t ${artifactId} .
 docker run -d --net primenet --ip 172.18.0.10 --name ${artifactId} ${artifactId}
 ```
+
+Stop or launch multple instaces
+
+```
+NB_CONTAINERS=3
+for (( i=0; i<$NB_CONTAINERS; i++ ))
+do
+   echo docker stop ${artifactId}
+   echo docker rm ${artifactId}
+done
+
+docker rmi ${artifactId}
+docker build -t ${artifactId} .
+docker run -d --net primenet --ip 172.18.0.1$i --name ${artifactId} ${artifactId}
+
+for (( i=0; i<$NB_CONTAINERS; i++ ))
+do
+    echo docker run -d --net primenet --ip 172.18.0.1$i --name ${artifactId} ${artifactId}
+done
+```
