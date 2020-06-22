@@ -46,19 +46,18 @@ docker run -d --net primenet --ip 172.18.0.10 --name ${artifactId} ${artifactId}
 Stop or launch multple instaces
 
 ```
-NB_CONTAINERS=3
+NB_CONTAINERS=2
 for (( i=0; i<$NB_CONTAINERS; i++ ))
 do
-   echo docker stop ${artifactId}
-   echo docker rm ${artifactId}
+   docker stop ${artifactId}-$i
+   docker rm ${artifactId}-$i
 done
 
 docker rmi ${artifactId}
 docker build -t ${artifactId} .
-docker run -d --net primenet --ip 172.18.0.1$i --name ${artifactId} ${artifactId}
 
 for (( i=0; i<$NB_CONTAINERS; i++ ))
 do
-    echo docker run -d --net primenet --ip 172.18.0.1$i --name ${artifactId} ${artifactId}
+    docker run -d --net primenet --ip 172.18.0.1$i --name ${artifactId}-$i ${artifactId}
 done
 ```
